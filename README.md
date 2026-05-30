@@ -3,7 +3,9 @@
 A collection of UI redesign mockups and community feedback analysis for [ETF X-Ray](https://etf-xray.net), a free tool that visualizes where your money actually goes when you invest in broad market index funds.
 
 Feedback HTML: https://macyso12.github.io/etf-xray-design-feedback/
+
 Web App Redesign HTML: https://macyso12.github.io/etf-xray-designs/
+
 Actual App: https://etf-xray.net/
 
 ---
