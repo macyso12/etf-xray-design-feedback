@@ -1,0 +1,303 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500&display=swap');
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0E0E0C;
+    --card: #161614;
+    --raised: #1E1E1B;
+    --border: rgba(255,255,255,0.07);
+    --border-bright: rgba(255,255,255,0.13);
+    --text: #E8E8E0;
+    --muted: #6B6B60;
+    --dim: #3A3A32;
+    --mono: 'DM Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+    --green: #1D9E75;
+    --green-bg: rgba(29,158,117,0.1);
+    --green-border: rgba(29,158,117,0.2);
+    --green-text: #5DCAA5;
+    --amber: #EF9F27;
+    --amber-bg: rgba(239,159,39,0.09);
+    --amber-border: rgba(239,159,39,0.2);
+    --amber-text: #FAC775;
+    --blue: #378ADD;
+    --blue-bg: rgba(55,138,221,0.09);
+    --blue-border: rgba(55,138,221,0.2);
+    --blue-text: #85B7EB;
+    --red: #E24B4A;
+    --red-bg: rgba(226,75,74,0.09);
+    --red-border: rgba(226,75,74,0.2);
+    --red-text: #F09595;
+  }
+
+  body { font-family: var(--sans); background: var(--bg); color: var(--text); }
+
+  .shell { padding: 20px; }
+
+  .page-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 0.5px solid var(--border-bright);
+  }
+  .page-title { font-size: 14px; font-weight: 500; color: var(--text); letter-spacing: -0.2px; }
+  .page-sub { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: 0.08em; }
+
+  .summary-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .scard {
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 0.5px solid var(--border-bright);
+    background: var(--card);
+  }
+  .scard-num { font-family: var(--mono); font-size: 22px; font-weight: 500; line-height: 1; margin-bottom: 4px; }
+  .scard-lbl { font-size: 11px; color: var(--muted); }
+
+  .section-title {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::after { content: ''; flex: 1; height: 0.5px; background: var(--border); }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+
+  .item {
+    background: var(--card);
+    border: 0.5px solid var(--border-bright);
+    border-radius: 8px;
+    padding: 13px 15px;
+    position: relative;
+  }
+  .item-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 3px;
+    margin-bottom: 8px;
+  }
+  .tag-quick { background: var(--green-bg); color: var(--green-text); border: 0.5px solid var(--green-border); }
+  .tag-medium { background: var(--amber-bg); color: var(--amber-text); border: 0.5px solid var(--amber-border); }
+  .tag-big { background: var(--blue-bg); color: var(--blue-text); border: 0.5px solid var(--blue-border); }
+  .tag-ux { background: var(--red-bg); color: var(--red-text); border: 0.5px solid var(--red-border); }
+
+  .item-title { font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 5px; line-height: 1.3; }
+  .item-body { font-size: 12px; color: var(--muted); line-height: 1.55; }
+  .item-quote {
+    margin-top: 9px;
+    padding: 7px 10px;
+    background: var(--raised);
+    border-left: 2px solid var(--dim);
+    border-radius: 0 4px 4px 0;
+    font-size: 11px;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.5;
+  }
+  .votes {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--dim);
+    margin-top: 8px;
+  }
+  .votes i { font-size: 11px; }
+
+  .full-width { grid-column: 1 / -1; }
+
+  .legend {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .leg { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); }
+  .leg-dot { width: 8px; height: 8px; border-radius: 2px; }
+</style>
+
+<div class="shell">
+  <div class="page-header">
+    <div class="page-title">r/dataisbeautiful — feedback digest</div>
+    <div class="page-sub">23 comments · sorted by theme</div>
+  </div>
+
+  <div class="summary-row">
+    <div class="scard">
+      <div class="scard-num" style="color:var(--green-text)">4</div>
+      <div class="scard-lbl">Quick wins</div>
+    </div>
+    <div class="scard">
+      <div class="scard-num" style="color:var(--amber-text)">4</div>
+      <div class="scard-lbl">Medium features</div>
+    </div>
+    <div class="scard">
+      <div class="scard-num" style="color:var(--blue-text)">3</div>
+      <div class="scard-lbl">Big features</div>
+    </div>
+    <div class="scard">
+      <div class="scard-num" style="color:var(--red-text)">3</div>
+      <div class="scard-lbl">UX issues</div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="leg"><div class="leg-dot" style="background:var(--green)"></div>Quick win — low effort, high impact</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--amber)"></div>Medium — needs design + dev work</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--blue)"></div>Big feature — significant scope</div>
+    <div class="leg"><div class="leg-dot" style="background:var(--red)"></div>UX issue — fix before shipping</div>
+  </div>
+
+  <div class="section-title">Quick wins</div>
+  <div class="grid" style="margin-bottom:20px">
+
+    <div class="item">
+      <div class="item-tag tag-quick">Quick win</div>
+      <div class="item-title">Add dollar value input (not just share count)</div>
+      <div class="item-body">Users want to enter how much they've invested in $ rather than number of shares. Also fixes mutual fund vs ETF symbol mismatch — if someone has VFIAX they can just enter the dollar amount instead of converting to VOO shares.</div>
+      <div class="item-quote">"Allowing me to input a price in USD would make the problem go away."</div>
+      <div class="votes"><i class="ti ti-arrow-up" aria-hidden="true"></i> 3 upvotes</div>
+    </div>
+
+    <div class="item">
+      <div class="item-tag tag-quick">Quick win</div>
+      <div class="item-title">Make colors encode meaning, not decoration</div>
+      <div class="item-body">Multiple users confused about what the green shading means. Currently it's purely aesthetic. Should map to sector, market cap, or weight — with a clear legend. This is low-hanging fruit that makes the treemap immediately more useful.</div>
+      <div class="item-quote">"What do the colors represent? If it's darker green does it mean something?" / "The colors don't indicate anything yet. I just thought it looks pretty."</div>
+      <div class="votes"><i class="ti ti-arrow-up" aria-hidden="true"></i> 2 upvotes</div>
+    </div>
+
+    <div class="item">
+      <div class="item-tag tag-quick">Quick win</div>
+      <div class="item-title">Add individual stock tickers alongside ETFs</div>
+      <div class="item-body">Users who hold individual stocks (e.g. AAPL, NVDA directly) want to include them in the analysis so they can see total concentration across ETFs + individual positions combined.</div>
+      <div class="item-quote">"Allowing stock tickers also so you can see your concentration including individual stocks you own."</div>
+      <div class="votes"><i class="ti ti-arrow-up" aria-hidden="true"></i> 2 upvotes</div>
+    </div>
+
+    <div class="item">
+      <div class="item-tag tag-quick">Quick win</div>
+      <div class="item-title">Fix the "Unknown" / "Others" breakout</div>
+      <div class="item-body">The grey "Unknown" bar breaking up the sector/geography chart mid-flow is jarring. Should be pushed to the end or displayed as a hatched "uncategorized" segment. Same for the blob of unlabeled cells in the treemap.</div>
+      <div class="item-quote">"That grey break in the midst of colored subdivisions is just egregious. You can certainly push it to last position."</div>
+      <div class="votes"><i class="ti ti-arrow-up" aria-hidden="true"></i> 2 upvotes</div>
+    </div>
+
+  </div>
+
+  <div class="section-title">Medium features</div>
+  <div class="grid" style="margin-bottom:20px">
+
+    <div class="item">
+      <div class="item-tag tag-medium">Medium</div>
+      <div class="item-title">Expand European & international ETF support</div>
+      <div class="item-body">A significant portion of commenters couldn't use the tool at all because their ETFs weren't supported. Mentioned tickers: VWCE, VWRA, VWRP, VUAG, MEUD, HCHS, VFEG, XMWX, INRG, Schwab ETFs. European investors are a big underserved segment.</div>
+      <div class="item-quote">"None of my ETFs are available." / "It doesn't appear to have VWCE which I thought was pretty fundamental."</div>
+      <div class="votes"><i class="ti ti-arrow-up" aria-hidden="true"></i> 6 upvotes combined</div>
+    </div>
+
+    <div class="item">
+      <div class="item-tag tag-medium">Medium</div>
+      <div class="item-title">Support bonds, crypto, and mutual funds</div>
+      <div class="item-body">OP themselves flagged this. Users with bond ETFs, crypto, and Fidelity/Vanguard mutual funds want a complete portfolio picture, not just equity ETFs. The tool loses a lot of value if significant parts of someone's portfolio are excluded.</div>
+      <div class="item-quote">"I also own some fidelity mutual funds, bond ETF and crypto — that's what I am planning to add as next steps."</div>
+      <div class="votes"><i class="ti ti-arrow-up" aria-hidden="true"></i> 8 upvotes</div>
+    </div>
+
+    <div class="item">
+      <div class="item-tag tag-medium">Medium</div>
+      <div class="item-title">Switch to SEC EDGAR / NPORT data source</div>
+      <div class="item-body">A commenter with experience flagged that scraping iShares/Vanguard/Blackrock directly is fragile. The better approach is pulling from SEC's EDGAR NPORT filings using the CIK number — quarterly, structured, and authoritative. More reliable long-term.</div>
+      <div class="item-quote">"The best way is to log the cik number and go out to SEC's Edgar data and download the nport."</div>
+      <div class="votes"><i class="ti ti-arrow-up" aria-hidden="true"></i> 2 upvotes</div>
+    </div>
+
+    <div class="item">
+      <div class="item-tag tag-medium">Medium</div>
+      <div class="item-title">401k + brokerage combined view</div>
+      <div class="item-body">Users want to combine holdings across accounts — 401k, brokerage, IRA — into a single exposure view. This is what separates a toy from a real financial tool. Would likely require some kind of portfolio saving/session feature.</div>
+      <div class="item-quote">"Would be great to see this for a full portfolio across 401k and brokerage together."</div>
+      <div class="votes"><i class="ti ti-arrow-up" aria-hidden="true"></i> 2 upvotes</div>
+    </div>
+
+  </div>
+
+  <div class="section-title">Big features</div>
+  <div class="grid-3" style="margin-bottom:20px">
+
+    <div class="item">
+      <div class="item-tag tag-big">Big feature</div>
+      <div class="item-title">Overlap / duplication detection</div>
+      <div class="item-body">The core "aha moment" of the tool — showing users they're buying the same companies 5 different ways. Should be a dedicated view: "You're buying MSFT through 4 ETFs." This is the top comment's reaction and the main value prop.</div>
+      <div class="item-quote">"My 'diversified' portfolio is just 40% Apple and Microsoft with extra steps."</div>
+      <div class="votes"><i class="ti ti-arrow-up" aria-hidden="true"></i> 41 upvotes</div>
+    </div>
+
+    <div class="item">
+      <div class="item-tag tag-big">Big feature</div>
+      <div class="item-title">Shareable / exportable report</div>
+      <div class="item-body">The top-voted aesthetic comment ("would hang this on my wall") signals demand for a shareable output — PNG export, shareable link, or PDF. Useful for posting to r/personalfinance, sharing with a financial advisor, or just saving for reference.</div>
+      <div class="item-quote">"I just like it for the color scheme. Would hang this on my wall."</div>
+      <div class="votes"><i class="ti ti-arrow-up" aria-hidden="true"></i> 1 upvote</div>
+    </div>
+
+    <div class="item">
+      <div class="item-tag tag-big">Big feature</div>
+      <div class="item-title">Reverse lookup: "which ETFs hold this stock?"</div>
+      <div class="item-body">One commenter mentioned difficulty reducing NVDA exposure — this implies a reverse lookup feature: enter a stock ticker and see all the ETFs in your portfolio (or universally) that hold it, and at what weight. Useful for managing concentration actively.</div>
+      <div class="item-quote">"I spent a ton of time trying to reduce my nvidia exposure, and it was HARD."</div>
+      <div class="votes"><i class="ti ti-arrow-up" aria-hidden="true"></i> 5 upvotes</div>
+    </div>
+
+  </div>
+
+  <div class="section-title">UX issues to fix</div>
+  <div class="grid-3">
+
+    <div class="item">
+      <div class="item-tag tag-ux">UX issue</div>
+      <div class="item-title">It's not clear what ETF is being shown</div>
+      <div class="item-body">First-time users don't understand the input — one commenter couldn't figure out which ETF the visualization was for. The input section and the output need to be more clearly connected. Show the active ETFs at the top of the results.</div>
+      <div class="item-quote">"I can't tell what ETF this is for. Am I missing something?"</div>
+      <div class="votes"><i class="ti ti-arrow-up" aria-hidden="true"></i> 3 upvotes</div>
+    </div>
+
+    <div class="item">
+      <div class="item-tag tag-ux">UX issue</div>
+      <div class="item-title">Small cells have no label or number</div>
+      <div class="item-body">Treemap cells below a certain size show neither a ticker nor a percentage, leaving users guessing. Should either show a tooltip on hover, display "< 0.1%", or consolidate into a labeled "Other" group rather than silently disappearing.</div>
+      <div class="item-quote">"The ones with no number — are they supposed to be 0.1% or less? What if there's no name nor no number?"</div>
+      <div class="votes"><i class="ti ti-arrow-up" aria-hidden="true"></i> 2 upvotes</div>
+    </div>
+
+    <div class="item">
+      <div class="item-tag tag-ux">UX issue</div>
+      <div class="item-title">Vertical bars suggested over horizontal</div>
+      <div class="item-body">The horizontal bar chart layout for sector/geography breakdown drew criticism. Vertical bars would feel more natural for comparison. Alternatively, a donut or proportional area chart could work better for composition data specifically.</div>
+      <div class="item-quote">"Personally I'd have the bar graphs being vertical instead of horizontal. This layout hurts."</div>
+      <div class="votes"><i class="ti ti-arrow-up" aria-hidden="true"></i> 2 upvotes</div>
+    </div>
+
+  </div>
+</div>
